@@ -9,3 +9,17 @@
 .h1-global{
     text-align: center;
 }
+
+.home-sem-cadastros{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+}
+
+.home-page-content{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
