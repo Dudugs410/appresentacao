@@ -8,7 +8,7 @@ export const ConstsContext = createContext({
 function ConstsProvider({ children }) {
     // Initialize db from localStorage or default to an empty array
     const [db, setDb] = useState(JSON.parse(localStorage.getItem('db')) ?? []);
-
+    const [editObj, setEditObj] = useState({})
     // Sync db with localStorage whenever it changes
     useEffect(() => {
         localStorage.setItem('db', JSON.stringify(db));
@@ -19,6 +19,9 @@ function ConstsProvider({ children }) {
             value={{
                 db,
                 setDb,
+
+                editObj,
+                setEditObj,
             }}
         >
             {children}

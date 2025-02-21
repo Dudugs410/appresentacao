@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { FiCheck, FiEdit, FiTrash, FiX } from 'react-icons/fi';
+import { FiCheck, FiEdit, FiPlus, FiTrash, FiX } from 'react-icons/fi';
 
-const TabelaDeCadastros = ({ cadastros, onChangeOption }) => {
+import './tabelaDeCadastros.scss'
+
+const TabelaDeCadastros = ({ cadastros, option, onChangeOption, onAddNew, onEdit, onDelete, }) => {
     const [tableDb, setTableDb] = useState(cadastros || []);
 
     // Update tableDb when cadastros changes
     useEffect(() => {
+        console.log('option: ', option)
         if(cadastros !== undefined){
             setTableDb(cadastros);    
         }
@@ -22,16 +25,32 @@ const TabelaDeCadastros = ({ cadastros, onChangeOption }) => {
     const BtnContainer = () => {
         return (
             <div className='btn-container'>
-                <button className='btn btn-primary' onClick={onChangeOption}>Cadastrar</button>
+                {
+                    option !== 0 ?
+                        <button 
+                            className='btn btn-primary' 
+                            onClick={onChangeOption} 
+                        >
+                            <FiPlus/> Novo
+                        </button>       
+                    
+                    :
+                        <></>
+                }
             </div>
         );
     };
 
+    const handleEdit = (obj) => {
+        onEdit()
+    }
+
     return (
         <div className='cadastros-table'>
+            <BtnContainer />
             {tableDb && tableDb.length > 0 ? (
-                <table className="table">
-                    <thead>
+                <table className="table table-striped table-hover">
+                    <thead className='table-primary'>
                         <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">E-mail</th>
@@ -46,12 +65,12 @@ const TabelaDeCadastros = ({ cadastros, onChangeOption }) => {
                             <tr key={index}>
                                 <td data-label="nome">{object.NOME}</td>
                                 <td data-label="email">{object.EMAIL}</td>
-                                <td data-label="tipo">{object.ADMIN === true ? <FiCheck /> : <FiX />}</td>
-                                <th className='sticky-col start-col' scope="row" style={{ textAlign: 'center' }}>
-                                    <FiEdit className="icon" />
+                                <td data-label="tipo">{object.ADMIN === true ? <FiCheck style={{ color: 'green'}}/> : <FiX style={{ color: 'red'}}/>}</td>
+                                <th className='sticky-col start-col btn-table' scope="row" style={{ textAlign: 'center' }} onClick={handleEdit}>
+                                    <FiEdit className="icon" style={{color: 'blue'}}/>
                                 </th>
-                                <th className='sticky-col end-col' scope="row" style={{ textAlign: 'center' }}>
-                                    <FiTrash className="icon" />
+                                <th className='sticky-col end-col btn-table' scope="row" style={{ textAlign: 'center' }}>
+                                    <FiTrash className="icon btn-table" style={{color: 'red'}}/>
                                 </th>
                             </tr>
                         ))}
@@ -60,7 +79,6 @@ const TabelaDeCadastros = ({ cadastros, onChangeOption }) => {
             ) : (
                 <div className='sem-cadastros'>
                     <h4>Não existem cadastros</h4>
-                    <BtnContainer />
                 </div>
             )}
         </div>

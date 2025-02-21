@@ -1,3 +1,20 @@
 .cadastros-table{
     
 }
+
+.btn-container{
+    display: flex;
+    padding-bottom: 1%;
+    justify-content: start;
+}
+
+.btn-table {
+    &:hover {
+      cursor: pointer;
+      color: lightblue !important;
+  
+      .icon {
+        color: lightblue !important; // Change icon color on hover
+      }
+    }
+  }

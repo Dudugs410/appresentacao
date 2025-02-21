@@ -1,46 +1,25 @@
 import { useState } from 'react';
-import './cadastrar.scss';
+import '../Cadastrar/cadastrar.scss';
 
-const Cadastrar = ({ onClose, onUpdate }) => {
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false); // Default is false
+const Editar = ({ object, onClose, onUpdate }) => {
+    const [nome, setNome] = useState(object.NOME);
+    const [email, setEmail] = useState(object.EMAIL);
+    const [isAdmin, setIsAdmin] = useState(object.ADMIN); // Default is false
 
-    const handleCadastro = (e) => {
-        e.preventDefault(); // Prevent form submission
-        console.log({ nome, email, isAdmin }); // Log the form data (for testing)
+    const handleSave = (e) => {
 
-        let db = JSON.parse(localStorage.getItem('db'))
-        
-        if(db && db.length > 0){
-            let newCadastro = {
-                NOME: nome,
-                EMAIL: email,
-                ADMIN: isAdmin,
-                ID: db.length + 1
-            }
-            db.push(newCadastro)
-        } else {
-            let newCadastro = {
-                NOME: nome,
-                EMAIL: email,
-                ADMIN: isAdmin,
-                ID: 0
-            }
-            db = []
-            db.push(newCadastro)
+        //fecha o componente de ediçao e atualiza o db no localStorage//
 
-        }
-
-        localStorage.setItem('db', JSON.stringify(db))
-        
         onUpdate()
-        onClose(); // Close the form
-    };
+        onClose()
+    }
 
     const handleCancel = () => {
-        onClose(); // Close the form
-    };
+
+        //fecha o componente de edição
+
+        onClose()
+    }
 
     return (
         <div className='form-container'>
@@ -81,7 +60,7 @@ const Cadastrar = ({ onClose, onUpdate }) => {
                     <label className="form-check-label" htmlFor="exampleCheck1">Admin</label>
                 </div>
                 <div className='btn-container' style={{ display: 'inline-flex', gap: '5px' }}>
-                    <button type="submit" className="btn btn-primary" onClick={handleCadastro}>Cadastrar</button>
+                    <button type="submit" className="btn btn-primary" onClick={handleSave}>Salvar</button>
                     <button className="btn btn-danger" onClick={handleCancel}>Cancelar</button>
                 </div>
             </form>
@@ -89,4 +68,4 @@ const Cadastrar = ({ onClose, onUpdate }) => {
     );
 };
 
-export default Cadastrar;
+export default Editar;
