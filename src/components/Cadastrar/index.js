@@ -1,45 +1,40 @@
-import { useState } from 'react';
-import './cadastrar.scss';
+import { useState } from 'react'
+import './cadastrar.scss'
+import { toast } from 'react-toastify'
 
 const Cadastrar = ({ onClose, onUpdate }) => {
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false); // Default is false
+    const [nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const handleCadastro = (e) => {
-        e.preventDefault(); // Prevent form submission
-        console.log({ nome, email, isAdmin }); // Log the form data (for testing)
-
-        let db = JSON.parse(localStorage.getItem('db'))
-        
-        if(db && db.length > 0){
-            let newCadastro = {
-                NOME: nome,
-                EMAIL: email,
-                ADMIN: isAdmin,
-                ID: db.length + 1
-            }
-            db.push(newCadastro)
-        } else {
-            let newCadastro = {
-                NOME: nome,
-                EMAIL: email,
-                ADMIN: isAdmin,
-                ID: 0
-            }
-            db = []
-            db.push(newCadastro)
-
-        }
-
+        e.preventDefault()
+        console.log({ nome, email, isAdmin })
+      
+        let db = JSON.parse(localStorage.getItem('db')) || []
+      
+        const maxId = db.reduce((max, item) => (item.ID > max ? item.ID : max), -1)
+      
+        const newId = maxId + 1
+      
+        let newCadastro = {
+          NOME: nome,
+          EMAIL: email,
+          ADMIN: isAdmin,
+          ID: newId,
+        };
+      
+        db.push(newCadastro)
+      
         localStorage.setItem('db', JSON.stringify(db))
-        
+        toast.success('Registro cadastrado com sucesso')
+
         onUpdate()
-        onClose(); // Close the form
-    };
+        onClose()
+      }
 
     const handleCancel = () => {
-        onClose(); // Close the form
+        onClose()
     };
 
     return (

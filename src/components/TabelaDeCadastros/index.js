@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FiCheck, FiEdit, FiPlus, FiTrash, FiX } from 'react-icons/fi';
 
 import './tabelaDeCadastros.scss'
+import { ConstsContext } from '../../contexts/consts';
 
-const TabelaDeCadastros = ({ cadastros, option, onChangeOption, onAddNew, onEdit, onDelete, }) => {
+const TabelaDeCadastros = ({ cadastros, option, onChangeOption, onEdit, onDelete, }) => {
     const [tableDb, setTableDb] = useState(cadastros || []);
+    const { setEditObj, setDeleteObj } = useContext(ConstsContext)
 
     // Update tableDb when cadastros changes
     useEffect(() => {
@@ -42,7 +44,13 @@ const TabelaDeCadastros = ({ cadastros, option, onChangeOption, onAddNew, onEdit
     };
 
     const handleEdit = (obj) => {
+        setEditObj(obj)
         onEdit()
+    }
+
+    const handleDelete = (obj) => {
+        setDeleteObj(obj)
+        onDelete()
     }
 
     return (
@@ -66,11 +74,11 @@ const TabelaDeCadastros = ({ cadastros, option, onChangeOption, onAddNew, onEdit
                                 <td data-label="nome">{object.NOME}</td>
                                 <td data-label="email">{object.EMAIL}</td>
                                 <td data-label="tipo">{object.ADMIN === true ? <FiCheck style={{ color: 'green'}}/> : <FiX style={{ color: 'red'}}/>}</td>
-                                <th className='sticky-col start-col btn-table' scope="row" style={{ textAlign: 'center' }} onClick={handleEdit}>
+                                <th className='sticky-col start-col btn-table' scope="row" style={{ textAlign: 'center' }} onClick={()=>{handleEdit(object)}}>
                                     <FiEdit className="icon" style={{color: 'blue'}}/>
                                 </th>
                                 <th className='sticky-col end-col btn-table' scope="row" style={{ textAlign: 'center' }}>
-                                    <FiTrash className="icon btn-table" style={{color: 'red'}}/>
+                                    <FiTrash className="icon btn-table" style={{color: 'red'}} onClick={()=>{handleDelete(object)}}/>
                                 </th>
                             </tr>
                         ))}
