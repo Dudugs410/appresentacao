@@ -1,39 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import '../Cadastrar/cadastrar.scss'
 import './excluir.scss'
-import { toast } from 'react-toastify'
-import { TbColumnInsertLeft } from 'react-icons/tb';
 
-const Excluir = ({ object, onClose, onUpdate }) => {
-    const [nome, setNome] = useState(object.NOME)
-    const [email, setEmail] = useState(object.EMAIL)
-    const [isAdmin, setIsAdmin] = useState(object.ADMIN)
-    const ID = object.ID
+const Excluir = ({ object, onClose, onUpdate, onDelete }) => {
 
     const handleDelete = () => {
-
-        console.log('ID do objeto a ser deletado: ', ID)
-
-        let newDb = JSON.parse(localStorage.getItem('db'));
-      
-        const index = newDb.findIndex((item) => item.ID === ID);
-      
-        if (index !== -1) {
-          newDb.splice(index, 1)
-          toast.success('Registro Deletado com sucesso')
-        }
-        
-        console.log('newDb', newDb)
-        localStorage.setItem('db', JSON.stringify(newDb))
-      
+        onDelete(object)      
         onUpdate()
         onClose()
       };
 
     const handleCancel = () => {
-
-        //fecha o componente de edição
-
         onClose()
     }
 

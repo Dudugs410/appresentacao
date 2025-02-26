@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import '../Cadastrar/cadastrar.scss';
+import './editar.scss'
 import { toast } from 'react-toastify'
 
-const Editar = ({ object, onClose, onUpdate }) => {
+const Editar = ({ object, onClose, onUpdate, onEdit }) => {
     const [nome, setNome] = useState(object.NOME)
     const [email, setEmail] = useState(object.EMAIL)
     const [isAdmin, setIsAdmin] = useState(object.ADMIN)
@@ -11,27 +12,13 @@ const Editar = ({ object, onClose, onUpdate }) => {
     const handleSave = () => {
 
         let editObj = {
-          NOME: nome,
-          EMAIL: email,
-          ADMIN: isAdmin,
-          ID: ID,
-        };
+            NOME: nome,
+            EMAIL: email,
+            ADMIN: isAdmin,
+            ID: ID,
+          };
 
-        let newDb = JSON.parse(localStorage.getItem('db'));
-
-        const index = newDb.findIndex((item) => item.ID === ID);
-      
-        if (index !== -1) {
-          newDb[index] = editObj; // Replace the old object with the updated one
-          toast.success('Registro Editado com Sucesso!')
-        } else {
-            console.log('objeto não encontrado')
-        }
-
-        localStorage.setItem('db', JSON.stringify(newDb))
-
-
-
+        onEdit(editObj)
         onUpdate();
         onClose();
 
@@ -49,9 +36,9 @@ const Editar = ({ object, onClose, onUpdate }) => {
     },[])
 
     return (
-        <div className='form-container'>
-            <h1 className='h1-global'>Editar Cadastro</h1>
-            <form className='form-cadastro'>
+        <div className='editar-container'>
+            <form className='form-edit'>
+                <h1 className='h1-global'>Editar Cadastro</h1>
                 <div className="mb-3">
                     <label htmlFor="exampleInputName1" className="form-label">Nome</label>
                     <input

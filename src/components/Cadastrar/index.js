@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import './cadastrar.scss'
-import { toast } from 'react-toastify'
+import { ApiContext } from '../../contexts/apiContext'
 
-const Cadastrar = ({ onClose, onUpdate }) => {
+const Cadastrar = ({ onClose, onUpdate, onCadastro }) => {
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [isAdmin, setIsAdmin] = useState(false)
@@ -10,24 +10,14 @@ const Cadastrar = ({ onClose, onUpdate }) => {
     const handleCadastro = (e) => {
         e.preventDefault()
         console.log({ nome, email, isAdmin })
-      
-        let db = JSON.parse(localStorage.getItem('db')) || []
-      
-        const maxId = db.reduce((max, item) => (item.ID > max ? item.ID : max), -1)
-      
-        const newId = maxId + 1
-      
+
         let newCadastro = {
           NOME: nome,
           EMAIL: email,
           ADMIN: isAdmin,
-          ID: newId,
-        };
-      
-        db.push(newCadastro)
-      
-        localStorage.setItem('db', JSON.stringify(db))
-        toast.success('Registro cadastrado com sucesso')
+        }
+
+        onCadastro(newCadastro)
 
         onUpdate()
         onClose()
@@ -35,7 +25,7 @@ const Cadastrar = ({ onClose, onUpdate }) => {
 
     const handleCancel = () => {
         onClose()
-    };
+    }
 
     return (
         <div className='form-container'>
@@ -61,7 +51,7 @@ const Cadastrar = ({ onClose, onUpdate }) => {
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)} // Update email state
+                        onChange={(e) => setEmail(e.target.value)} 
                     />
                     <div id="emailHelp" className="form-text">Seu E-mail</div>
                 </div>
@@ -70,7 +60,7 @@ const Cadastrar = ({ onClose, onUpdate }) => {
                         type="checkbox"
                         className="form-check-input"
                         id="exampleCheck1"
-                        checked={isAdmin} // Bind to isAdmin state
+                        checked={isAdmin}
                         onChange={(e) => setIsAdmin(e.target.checked)} // Update isAdmin state
                     />
                     <label className="form-check-label" htmlFor="exampleCheck1">Admin</label>
@@ -81,7 +71,7 @@ const Cadastrar = ({ onClose, onUpdate }) => {
                 </div>
             </form>
         </div>
-    );
-};
+    )
+}
 
-export default Cadastrar;
+export default Cadastrar
