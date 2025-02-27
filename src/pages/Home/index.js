@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
-import Cadastrar from '../../components/Cadastrar';
-import TabelaDeCadastros from '../../components/TabelaDeCadastros';
-import './home.scss';
-import { ConstsContext } from '../../contexts/consts'; // Correct import
-import Editar from '../../components/Editar';
-import Excluir from '../../components/Excluir';
-import { ApiContext } from '../../contexts/apiContext';
+import { useContext, useEffect, useState } from 'react'
+import Cadastrar from '../../components/Cadastrar'
+import TabelaDeCadastros from '../../components/TabelaDeCadastros'
+import './home.scss'
+import { ConstsContext } from '../../contexts/consts'
+import Editar from '../../components/Editar'
+import Excluir from '../../components/Excluir'
+import { ApiContext } from '../../contexts/apiContext'
 
 const Home = () => {
     const { loadCadastros, addCadastro, editCadastro, deleteCadastro } = useContext(ApiContext)
-    const { db, setDb, editObj, deleteObj } = useContext(ConstsContext); // Access db from context
+    const { db, setDb, editObj, deleteObj } = useContext(ConstsContext)
     const [option, setOption] = useState(null)
 
     let dbTemp = []
@@ -61,7 +61,7 @@ const Home = () => {
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter } from 'react-router-dom'
 import RoutesApp from './routes'
-import { ToastContainer } from 'react-toastify';
-import ApiProvider from './contexts/apiContext';
-import ConstsProvider from './contexts/consts';
+import { ToastContainer } from 'react-toastify'
+import ApiProvider from './contexts/apiContext'
+import ConstsProvider from './contexts/consts'
 
 function App() {
   return (
@@ -28,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
