@@ -16,7 +16,6 @@ const Home = () => {
 
     useEffect(()=>{
         dbTemp = loadCadastros()
-        
     },[])
 
     useEffect(()=>{

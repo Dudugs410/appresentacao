@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../Cadastrar/cadastrar.scss'
 import './editar.scss'
-import { toast } from 'react-toastify'
 
 const Editar = ({ object, onClose, onUpdate, onEdit }) => {
     const [nome, setNome] = useState(object.NOME)

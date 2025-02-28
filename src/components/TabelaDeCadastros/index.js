@@ -1,28 +1,28 @@
-import { useContext, useEffect, useState } from 'react';
-import { FiCheck, FiEdit, FiPlus, FiTrash, FiX } from 'react-icons/fi';
+import { useContext, useEffect, useState } from 'react'
+import { FiCheck, FiEdit, FiPlus, FiTrash, FiX } from 'react-icons/fi'
 
 import './tabelaDeCadastros.scss'
-import { ConstsContext } from '../../contexts/consts';
+import { ConstsContext } from '../../contexts/consts'
 
 const TabelaDeCadastros = ({ cadastros, option, onChangeOption, onEdit, onDelete, }) => {
-    const [tableDb, setTableDb] = useState(cadastros || []);
+    const [tableDb, setTableDb] = useState(cadastros || [])
     const { setEditObj, setDeleteObj } = useContext(ConstsContext)
 
     // Update tableDb when cadastros changes
     useEffect(() => {
         console.log('option: ', option)
         if(cadastros !== undefined){
-            setTableDb(cadastros);    
+            setTableDb(cadastros)   
         }
 
-    }, [cadastros]);
+    }, [cadastros])
 
     // Log tableDb and cadastros for debugging
     useEffect(() => {
-        console.log('tableDb: ', tableDb);
-        console.log('cadastros: ', cadastros);
-        console.log('storage db: ', JSON.parse(localStorage.getItem('db')));
-    }, [tableDb]);
+        console.log('tableDb: ', tableDb)
+        console.log('cadastros: ', cadastros)
+        console.log('storage db: ', JSON.parse(localStorage.getItem('db')))
+    }, [tableDb])
 
     const BtnContainer = () => {
         return (
@@ -40,8 +40,8 @@ const TabelaDeCadastros = ({ cadastros, option, onChangeOption, onEdit, onDelete
                         <></>
                 }
             </div>
-        );
-    };
+        )
+    }
 
     const handleEdit = (obj) => {
         setEditObj(obj)
@@ -90,7 +90,7 @@ const TabelaDeCadastros = ({ cadastros, option, onChangeOption, onEdit, onDelete
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default TabelaDeCadastros;
+export default TabelaDeCadastros

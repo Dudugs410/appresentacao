@@ -9,28 +9,28 @@ function ApiProvider({children}){
     	// retorna array com dados cadastrados
       const loadCadastros = async () => {
         try {
-          const token = localStorage.getItem('token');
+          const token = localStorage.getItem('token')
           if (token) {
-            const response = await api.get('cadastros');
-            return response.data;
+            const response = await api.get('cadastros')
+            return response.data
           }
       
-          const db = localStorage.getItem('db');
+          const db = localStorage.getItem('db')
           if (db) {
-            return JSON.parse(db);
+            return JSON.parse(db)
           }
       
-          return [];
+          return []
         } catch (error) {
-          console.error('Error fetching cadastros:', error);
-          return [];
+          console.error('Error fetching cadastros:', error)
+          return []
         }
-      };
+      }
 
 		//Adiciona novo objeto
 		const addCadastro = async (cadastro) => {
 			try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token')
         if (token) {
 					let body = cadastro
 					const response = await api.post('cadastros', body)
@@ -63,7 +63,7 @@ function ApiProvider({children}){
 		//Edita objeto
 		const editCadastro = async (cadastro) => {
 			try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token')
         if (token) { 
           let body = JSON.stringify(cadastro)
           const response = await fetch('*endereço da api*', {
@@ -92,10 +92,10 @@ function ApiProvider({children}){
         if(dbTemp){
           const db = JSON.parse(dbTemp)
   
-          const index = db.findIndex((item) => item.ID === cadastro.ID);
+          const index = db.findIndex((item) => item.ID === cadastro.ID)
         
           if (index !== -1) {
-            db[index] = cadastro; // Replace the old object with the updated one
+            db[index] = cadastro // Replace the old object with the updated one
             toast.success('Registro Editado com Sucesso!')
           } else {
               console.log('objeto não encontrado')
@@ -112,7 +112,7 @@ function ApiProvider({children}){
 		//Deleta objeto
 		const deleteCadastro = async (cadastro) => {
 			try {		
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token')
         if (token) { 
           let body = cadastro
 					api.delete('cadastro', {
@@ -140,7 +140,7 @@ function ApiProvider({children}){
 
           console.log('ID do objeto a ser deletado: ', cadastro.ID)
         
-          const index = db.findIndex((item) => item.ID === cadastro.ID);
+          const index = db.findIndex((item) => item.ID === cadastro.ID)
         
           if (index !== -1) {
             db.splice(index, 1)
