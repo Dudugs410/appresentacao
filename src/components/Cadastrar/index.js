@@ -1,6 +1,5 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import './cadastrar.scss'
-import { ApiContext } from '../../contexts/apiContext'
 
 const Cadastrar = ({ onClose, onUpdate, onCadastro }) => {
     const [nome, setNome] = useState('')

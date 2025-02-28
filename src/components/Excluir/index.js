@@ -8,7 +8,7 @@ const Excluir = ({ object, onClose, onUpdate, onDelete }) => {
         onDelete(object)      
         onUpdate()
         onClose()
-      };
+      }
 
     const handleCancel = () => {
         onClose()
@@ -42,7 +42,7 @@ const Excluir = ({ object, onClose, onUpdate, onDelete }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Excluir;
+export default Excluir

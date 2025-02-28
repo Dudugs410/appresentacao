@@ -25,7 +25,7 @@ function App() {
         pauseOnHover
       />
     </BrowserRouter>
-  );
+  )
 }
 
 export default App

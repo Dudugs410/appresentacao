@@ -1,13 +1,13 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react'
 
 export const ConstsContext = createContext({
     db: [],
     setDb: () => {},
-});
+})
 
 function ConstsProvider({ children }) {
 
-    const [db, setDb] = useState(JSON.parse(localStorage.getItem('db')) ?? []);
+    const [db, setDb] = useState(JSON.parse(localStorage.getItem('db')) ?? [])
     const [editObj, setEditObj] = useState({})
     const [deleteObj, setDeleteObj] = useState({})
 
@@ -26,7 +26,7 @@ function ConstsProvider({ children }) {
         >
             {children}
         </ConstsContext.Provider>
-    );
+    )
 }
 
-export default ConstsProvider;
+export default ConstsProvider

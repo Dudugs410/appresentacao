@@ -21,8 +21,8 @@ api.interceptors.request.use(
   )
 
 export const cancelOngoingRequests = () => {
-  globalAbortController.abort(); // Cancel ongoing requests
-  globalAbortController = new AbortController(); // Reset the controller for future use
+  globalAbortController.abort() // Cancel ongoing requests
+  globalAbortController = new AbortController() // Reset the controller for future use
 }
 
 export function config(){
